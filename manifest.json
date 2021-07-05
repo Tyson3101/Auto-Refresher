@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Auto Refresher Extension",
+  "version": "1.0.0",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["./dist/content.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["./dist/background.js"]
+  },
+  "permissions": ["tabs"],
+  "browser_action": {
+    "default_popup": "./popup/popup.html",
+    "default_icon": "./img/refresh.png",
+    "default_title": "Input the refresh delay."
+  }
+}

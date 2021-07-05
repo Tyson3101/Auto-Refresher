@@ -6,5 +6,5 @@ submitBtn.onclick = () => {
   console.log("Clicked");
 
   const delay = parseInt(input.value);
-  chrome.runtime.sendMessage({ delay });
+  chrome.runtime.sendMessage({ delay, url: window.location.href });
 };

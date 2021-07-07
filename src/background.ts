@@ -1,9 +1,10 @@
 let previousDelay: number;
 
 chrome.runtime.onMessage.addListener(
-  ({ delay, url }: { delay: number; url: string }) => {
+  ({ delay, stop }: { delay: number; stop: boolean }) => {
     console.log("Delay");
     clearInterval(previousDelay);
+    if (stop) return;
     const params = {
       active: true,
       currentWindow: true,
@@ -12,7 +13,7 @@ chrome.runtime.onMessage.addListener(
     chrome.tabs.query(params, gotTab);
     function gotTab(tabs: any) {
       previousDelay = setInterval(() => {
-        chrome.tabs.sendMessage(tabs[0].id, { refresh: true, url });
+        chrome.tabs.sendMessage(tabs[0].id, { refresh: true });
       }, delay * 1000);
     }
   }
